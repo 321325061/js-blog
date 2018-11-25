@@ -18,7 +18,11 @@ layui.use(['element', "layer"], function(){
   $password2.on("blur", function(){
     const pwd = $password.val()
     if($(this).val() !== pwd){
-      layer.msg("两次密码不一致")
+      layer.msg('两次输入的密码不一样',
+       {
+        icon: 5 ,
+        offset: '120px'
+      });
       $(this).val("")
     }
   })

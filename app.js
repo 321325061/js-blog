@@ -16,7 +16,7 @@ const CONFIG = {
   key:"Sid",
   masAge: 36e5,
   overwrite: true,
-  httpOnly: true,
+  httpOnly: false,
   signed: true,
   //是否刷新操作时间
   rolling: true

@@ -68,12 +68,7 @@ exports.login = async ctx => {
   await new Promise((resolve , reject) => {
     User.find({username}, (err ,data) => {
       if(err) return reject(err)
-      if(data.length === 0){
-        // ctx.render("isOk" , {
-        //   status: '用户名不存在，登录失败'
-        // })
-        return reject("用户名不存在")
-      } 
+      if(data.length === 0) return reject("用户名不存在") 
 
       //把用户传过来的密码，跟数据库的密码匹配
       if(data[0].password === encrypt(password)){
@@ -97,9 +92,9 @@ exports.login = async ctx => {
       domain: 'localhost',
       path: '/',
       maxAge: 36e5, //一天
-      httpOnly: true, // true 不让客户端访问这个 cookie
+      httpOnly: false, // true 不让客户端访问这个 cookie
       overwrite: false,
-     // signed: false  //是否显示签名
+      signed: false  //是否显示签名
     })
     //用户在数据库的 _id 值
     ctx.cookies.set("uid", data[0]._id, {
@@ -107,9 +102,9 @@ exports.login = async ctx => {
       domain: 'localhost',
       path: '/',
       maxAge: 36e5, //一天
-      httpOnly: true, //不让客户端访问这个 cookie
+      httpOnly: false, //不让客户端访问这个 cookie
       overwrite: false,
-      //signed: false //是否显示签名
+      signed: false //是否显示签名
     })
 
     //手动设置用户 session 过期

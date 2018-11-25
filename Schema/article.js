@@ -1,10 +1,14 @@
-const { Schema } = require("./config")
+const { Schema } = require("./config.js")
 
 
 const  ArticleShema = new Schema({
-    title: String,
-    conntent: String,
+    titles: String,
+    content: String,
+    tips: String,
     author: String
-} , {versionKey: false})
+} , {
+    versionKey: false,
+    timestamps:{createAt:'created'} //自带的，用来记录数据创建时间 ， 迟8H
+})
 
-exports.exports = ArticleShema  
+module.exports = ArticleShema 

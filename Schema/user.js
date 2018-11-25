@@ -7,5 +7,4 @@ const userSchema = new Schema({
   //取消显示版本号
 }, {versionKey: false})
 
-console.log("设置Schema:")
 module.exports = userSchema

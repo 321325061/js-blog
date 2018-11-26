@@ -106,10 +106,13 @@ block scripts
         $.post("/article", data, (msg) => {
           if(msg.status){
             layer.alert('发表成功', (res) => {
+              time: 1500,
               location.href = "/"
             })
           }else{
-            layer.alert(`发表失败，失败信息：${msg.msg}`)
+            layer.alert(`发表失败，失败信息：${msg.msg}`, {
+              time: 1500,
+            })
           }
         })
       })

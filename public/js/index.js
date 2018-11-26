@@ -1,21 +1,22 @@
-layui.use(["element", "laypage"], () => {
-  let element = layui.element
-  let laypage = layui.laypage
-  const $ = layui.$
+layui.use(['element', 'laypage'], function(){
+  let element = layui.element,
+      laypage = layui.laypage,
+      $ = layui.$
   
   element.tabDelete('demo', 'xxx')
+
 
   laypage.render({
     elem: "laypage",
     count: $("#laypage").data("maxnum"),
-    limit: 2,
-    groups: 3,
+    limit: 8,
+    groups: 5,
     curr: location.pathname.replace("/page/", ""),
-    jump(obj, f){
-      $("#laypage a").each((i, v) => {
-        let pageValue = `/page/${$(v).data("page")}`
-        v.href = pageValue
-      })
+    jump: function(obj, first){      
+      $('#laypage a').each((i ,v) => {
+          let pageValue = `/page/${$(v).data('page')}` 
+          v.href = pageValue
+      })    
     }
-  })
+  }) 
 })

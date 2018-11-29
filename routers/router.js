@@ -3,6 +3,8 @@ const Router = require("koa-router")
 //拿到操作 user 表的逻辑对象
 const user = require("../control/user")
 const article = require("../control/article")
+const comment = require("../control/comment")
+const admin = require("../control/admin")
 
 
 const router = new Router
@@ -36,6 +38,23 @@ router.post('/article', user.keepLog , article.add)
 
 // 文章列表分页 路由
 router.get("/page/:id", article.getList)
+
+// 文章详情页面
+router.get('/article/:id', user.keepLog ,article.details)
+
+// 发表评论
+router.post('/comment', user.keepLog, comment.save)
+
+// 文章 评论 头像 上传
+router.get('/admin/:id', user.keepLog, admin.index )
+
+//  任意路由访问 404页面
+router.get('*' , async ctx => {
+  await ctx.render('404', {
+      title: '404',
+
+  })
+})
 
 
 //直接铺盖赋值

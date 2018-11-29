@@ -1,12 +1,16 @@
 const { db } = require("../Schema/config")
-const ArticleShema = require("../Schema/article")
 
-
+//通过 db 的来创建一个操作 user 数据库的模型对象
 // 获取操作用户的权限
 const UserShame = require("../Schema/user")
 const User = db.model("users", UserShame)
-//通过 db 的来创建一个操作 user 数据库的模型对象
+// 获得 article 权限
+const ArticleShema = require("../Schema/article")
 const Article = db.model("articles", ArticleShema)
+// 获得操作评论 comment 权限
+const CommentShema = require("../Schema/comment")
+const Comment = db.model("comments", CommentShema)
+
 
 // 返回文章发表页
 exports.addPage = async (ctx) =>{
@@ -31,6 +35,7 @@ exports.add = async (ctx) => {
   const data = ctx.request.body
   // 添加文章的作者 
   data.author = ctx.session.uid
+  data.commentNum = 0
 
   // console.log("username:" + ctx.session.username)
   
@@ -38,6 +43,10 @@ exports.add = async (ctx) => {
     new Article(data).save((err, data) => {
         if(err) return reject(err)
         resolve(data)
+        //更新用户文章技术
+        User.update({_id: data.author}, {$inc:{articleNum: 1}}, err => {
+          if(err) return console.log(err)
+        })
     })
   })
   .then(data => {
@@ -66,7 +75,6 @@ exports.getList = async(ctx) => {
     err ?  console.log(err) : num
   })
 
-
   const num = 8
   const artList = await Article
     .find()
@@ -81,11 +89,37 @@ exports.getList = async(ctx) => {
     .then( data => data) //在查询成功后返回数据 到 data
     .catch(err => console.log(err)) //查询失败后 输出 并返回信息给 data
 
-
   await ctx.render('index', {
     session: ctx.session,
     titles: "实战博客",
     artList,
     maxNum
   })
+}
+
+// 文章详情
+exports.details = async(ctx) => {
+  //获取文章 id
+  const _id = ctx.params.id
+  
+  //查找文章本身数据
+  const article = await Article
+    .findById(_id)
+    .populate('author', 'username')
+    .then(data => data)
+
+  const comment = await Comment
+    .find({article: _id})
+    .sort("-created")
+    .populate('from', 'username avatar')
+    .then(data => data)
+    .catch(err => {console.log(err)})
+
+  await ctx.render('article', {
+    titles: "文章详情页",
+    article,
+    comment,
+    session: ctx.session
+  })
+
 }

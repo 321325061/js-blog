@@ -16,7 +16,7 @@ const CONFIG = {
   key:"Sid",
   masAge: 36e5,
   overwrite: true,
-  httpOnly: false,
+  httpOnly: true,
   signed: true,
   //是否刷新操作时间
   rolling: true
@@ -44,7 +44,37 @@ app
     console.log('项目启动成功，监听3000端口')
   })
 
+//创建管理员用户
+{
+  const { db } = require("./Schema/config")
+  const UserShame = require("./Schema/user")
+  const User = db.model('users' , UserShame) 
+  const encrpty = require('./util/encrypt')
+  User
+    .find({username: 'admin'})
+    .then(data => {
+      if(data.length === 0){
+        //管理员不存在 创建
+        new User({
+          username: 'admin',
+          password: encrpty('admin'),
+          role: 666,
+          articleNum: 0,
+          commentNum: 0
+        })
+        .save()    
+        .then(data => {
+          console.log('管理员用户名--> admin   密码--> admin')
+        })
+        .catch(err => {
+          console.log('管理员创建失败')
+        })
+      }else{
+        console.log('管理员用户名--> admin   密码--> admin')
+      }
+    })
 
+}
 
 
 

@@ -10,9 +10,7 @@ layui.use(['layedit', 'layer', 'element'], function(){
     height: 160
   }); //建立编辑器
 
-  $(".layui-unselect.layui-layedit-tool").hide()
-
-  
+  $(".layui-unselect.layui-layedit-tool").hide() //隐藏
 
   $(".comment button").click(async () => {
     let content = layedit.getContent(idx).trim()

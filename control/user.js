@@ -26,11 +26,12 @@ exports.reg = async ctx => {
       // 保存到数据库之前需要先加密，encrypt模块是自定义加密模块
       const _user = new User({
         username,
-        password: encrypt(password)
+        password: encrypt(password),
+        articleNum: 0,
+        commentNum: 0
       })
       
       _user.save((err, data) => {
-        console.log(data)
         if(err){
           reject(err)
         }else{
@@ -92,7 +93,7 @@ exports.login = async ctx => {
       domain: 'localhost',
       path: '/',
       maxAge: 36e5, //一天
-      httpOnly: false, // true 不让客户端访问这个 cookie
+      httpOnly: true, // true 不让客户端访问这个 cookie
       overwrite: false,
       signed: false  //是否显示签名
     })
@@ -102,7 +103,7 @@ exports.login = async ctx => {
       domain: 'localhost',
       path: '/',
       maxAge: 36e5, //一天
-      httpOnly: false, //不让客户端访问这个 cookie
+      httpOnly: true, //不让客户端访问这个 cookie
       overwrite: false,
       signed: false //是否显示签名
     })
@@ -113,9 +114,10 @@ exports.login = async ctx => {
     ctx.session = {
       username,
       uid: data[0]._id,
-      avatar: data[0].avatar
+      avatar: data[0].avatar,
+      role: data[0].role
     }
-
+    console.log("user的"+ ctx.session.username + "的role:" +ctx.session.role )
     //登陆成功
     await ctx.render('isOk', {
       status: '登陆成功'

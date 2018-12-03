@@ -19,7 +19,7 @@ const CONFIG = {
   httpOnly: true,
   signed: true,
   //是否刷新操作时间
-  rolling: true
+  rolling: false
 }
 
 //注册静态文件模板

@@ -94,7 +94,7 @@ exports.login = async ctx => {
       path: '/',
       maxAge: 36e5, //一天
       httpOnly: true, // true 不让客户端访问这个 cookie
-      overwrite: false,
+      overwrite: true,
       signed: false  //是否显示签名
     })
     //用户在数据库的 _id 值
@@ -104,7 +104,7 @@ exports.login = async ctx => {
       path: '/',
       maxAge: 36e5, //一天
       httpOnly: true, //不让客户端访问这个 cookie
-      overwrite: false,
+      overwrite: true,
       signed: false //是否显示签名
     })
 
@@ -117,7 +117,7 @@ exports.login = async ctx => {
       avatar: data[0].avatar,
       role: data[0].role
     }
-    console.log("user的"+ ctx.session.username + "的role:" +ctx.session.role )
+
     //登陆成功
     await ctx.render('isOk', {
       status: '登陆成功'
@@ -138,6 +138,11 @@ exports.keepLog = async(ctx , next) => {
     //session 没有
     //没有登陆
      if(ctx.cookies.get("username")){
+
+      let uid = ctx.session.get('username')
+        const avatar = await User.findById(uid)
+        .then(data => data.avatar)
+      
         ctx.session = {
           username: ctx.cookies.get("username"),
           uid: ctx.cookies.get("uid")
@@ -159,4 +164,30 @@ exports.logout = async(ctx) => {
   })
   console.log(1)
   ctx.redirect("/")
+}
+
+//用户头像上传
+exports.upload = async(ctx) => {
+  const filename = ctx.req.file.filename  
+  let data = {}
+
+  await User.update({_id: ctx.session.uid} , 
+      {$set: {avatar: '/avatar/'+ filename}}, 
+      (err , res) => {
+        if(err){
+          data = {
+            status: 0,
+            message: '上传失败'
+          }
+        }else{
+          data = {
+            status: 1,
+            message: '上传成功'
+          }
+        }
+      })
+
+    //更新session中的头像地址
+  ctx.session.avatar =  '/avatar/'+ filename
+  ctx.body= data
 }

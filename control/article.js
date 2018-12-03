@@ -123,3 +123,53 @@ exports.details = async(ctx) => {
   })
 
 }
+
+
+// 后台管理 查询对应用户所有文章
+exports.artlist = async (ctx) => {
+  const uid = ctx.session.uid
+  
+  const data = await Article.find({author: uid})
+
+  console.log(data)
+  ctx.body = {
+    //固定传数据写法, layui标准
+    code: 0,
+    count: data.length,
+    data
+  }
+
+}
+
+// 删除对应 id 的所有文章
+exports.del =  async(ctx) => {
+  let articleId = ctx.params.id
+  
+  // 用户的 articleNum -= 1
+  //还要删除文章对应的评论
+  //还要在 评论所对应的用户中 把 commentNum -= 1
+
+  let res = {}
+  await new  Article.findById(_id , (err , data) => {
+    if(err) return console.log(err)
+    uid = data.author
+
+    Article.deleteOne({_id}).then(err => {
+      if(err){
+        res = {
+          state: 1,
+          message: '删除失败'
+        }
+      }
+    })
+  })
+  
+  
+  
+
+  await User.update({_id: uid}, {$inc: {articleNum: -1}})
+
+  //删除所有的评论
+  await Comment.find({article: _id})
+
+}

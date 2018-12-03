@@ -32,7 +32,7 @@ exports.index = async (ctx) => {
       }
     })
 
-      console.log(ctx.session.username +"的role:"+ ctx.session.role)
+      // console.log(ctx.session.username +"的role:"+ ctx.session.role)
     if(flag){
       await ctx.render('./admin/admin-' + id, {
         role: ctx.session.role

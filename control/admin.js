@@ -1,18 +1,9 @@
-const { db } = require("../Schema/config")
+const Article = require('../Models/article')
+const User  = require('../Models/user')
+const Comment = require('../Models/comment')
+
 const fs = require('fs')
 const { join } = require('path')
-// 获取操作用户的权限
-//通过 db 的来创建一个操作 user 数据库的模型对象
-const UserShame = require("../Schema/user")
-const User = db.model("users", UserShame) 
-
-// 获取操作文章的权限
-const ArticleShema = require("../Schema/article")
-const Article = db.model("articles", ArticleShema)
-
-//获得 comment.js 的实例对象
-const CommentShema = require("../Schema/comment")
-const Comment = db.model("comments", CommentShema)
 
 exports.index = async (ctx) => {
     if(ctx.session.isNew){

@@ -1,9 +1,9 @@
-const { db } = require("../Schema/config")
-const UserShame = require("../Schema/user")
+const Article = require('../Models/article')
+const User  = require('../Models/user')
+const Comment = require('../Models/comment')
+
 const encrypt = require('../util/encrypt')
 
-//通过 db 的来创建一个操作 user 数据库的模型对象
-const User = db.model("users", UserShame)
 
 // 用户注册
 exports.reg = async ctx => {
@@ -190,4 +190,46 @@ exports.upload = async(ctx) => {
     //更新session中的头像地址
   ctx.session.avatar =  '/avatar/'+ filename
   ctx.body= data
+}
+
+// 后台管理 查询所有用户
+exports.userlist = async (ctx) => {
+    
+   const data = await User.find()
+  
+  // const data = await Article.find({author: uid})
+
+  // console.log(data)
+
+  ctx.body = {
+    //固定传数据写法, layui标准
+    code: 0,
+    count: data.length,
+    data
+  }
+
+}
+
+
+// 删除对应 用户id 的所有文章，评论 和 评论所对应的用户评论数
+exports.del =  async(ctx) => {
+  let userId = ctx.params.id
+
+  let res = {
+    state: 1,
+    message: '成功'
+  }
+  await User.findById(userId)
+    .then(data => {
+      console.log('userdata'+ data),
+      data.remove()      
+    })
+    .catch(err => {
+       res = {
+        state: 0,
+        message:  err
+       }
+    })
+
+    ctx.body = res
 }

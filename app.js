@@ -74,6 +74,30 @@ app
       }
     })
 
+   /*  User
+    .find({username: '111'})
+    .then(data => {
+      if(data.length === 0){
+        //管理员不存在 创建
+        new User({
+          username: '111',
+          password: encrpty('111'),
+          role: 1,
+          articleNum: 0,
+          commentNum: 0
+        })
+        .save()    
+        .then(data => {
+          console.log('用户名--> 111   密码--> 111')
+        })
+        .catch(err => {
+          console.log('创建失败')
+        })
+      }else{
+        console.log('用户名-->111   密码--> 111')
+      }
+    }) */
+
 }
 
 

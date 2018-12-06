@@ -1,16 +1,6 @@
-const { db } = require("../Schema/config")
-
-//通过 db 的来创建一个操作 user 数据库的模型对象
-// 获取操作用户的权限
-const UserShame = require("../Schema/user")
-const User = db.model("users", UserShame)
-// 获得 article 权限
-const ArticleShema = require("../Schema/article")
-const Article = db.model("articles", ArticleShema)
-// 获得操作评论 comment 权限
-const CommentShema = require("../Schema/comment")
-const Comment = db.model("comments", CommentShema)
-
+const Article = require('../Models/article')
+const User  = require('../Models/user')
+const Comment = require('../Models/comment')
 
 // 返回文章发表页
 exports.addPage = async (ctx) =>{
@@ -43,7 +33,7 @@ exports.add = async (ctx) => {
     new Article(data).save((err, data) => {
         if(err) return reject(err)
         resolve(data)
-        //更新用户文章技术
+        //更新用户文章计数
         User.update({_id: data.author}, {$inc:{articleNum: 1}}, err => {
           if(err) return console.log(err)
         })
@@ -131,7 +121,7 @@ exports.artlist = async (ctx) => {
   
   const data = await Article.find({author: uid})
 
-  console.log(data)
+  // console.log(data)
   ctx.body = {
     //固定传数据写法, layui标准
     code: 0,
@@ -143,33 +133,21 @@ exports.artlist = async (ctx) => {
 
 // 删除对应 id 的所有文章
 exports.del =  async(ctx) => {
-  let articleId = ctx.params.id
+  let _id = ctx.params.id
   
-  // 用户的 articleNum -= 1
-  //还要删除文章对应的评论
-  //还要在 评论所对应的用户中 把 commentNum -= 1
+  let res = {
+    state: 1,
+    message: '成功'
+  }
 
-  let res = {}
-  await new  Article.findById(_id , (err , data) => {
-    if(err) return console.log(err)
-    uid = data.author
-
-    Article.deleteOne({_id}).then(err => {
-      if(err){
-        res = {
-          state: 1,
-          message: '删除失败'
-        }
-      }
+  await Article.findById(_id)
+    .then(data => {data.remove(),console.log('artdata'+ data)})
+    .catch(err => {
+       res = {
+        state: 0,
+        message:  err
+       }
     })
-  })
-  
-  
-  
 
-  await User.update({_id: uid}, {$inc: {articleNum: -1}})
-
-  //删除所有的评论
-  await Comment.find({article: _id})
-
+    ctx.body = res
 }

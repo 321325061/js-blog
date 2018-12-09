@@ -55,7 +55,8 @@ body {
 }
 
 .blog-panel ul li a {
-  padding: 0 20px;
+  font-size: 17px;
+  padding: 0px 62px;
 }
 
 .blog-panel .layui-container {
@@ -92,7 +93,7 @@ body {
 
 /* 右导航 */
 .layui-col-space15 .layui-col-md4{
-  margin-top: -7.5px;
+  margin-top: -0.5px;
 }
 
 
@@ -106,3 +107,12 @@ body {
   color: #737573;
   border-top: 1px solid #e2e2e2;
 }
+
+/* 头像 退出 二级选项框 */
+.layui-nav-item dl.layui-anim dd a{
+  color: #8d8989;
+  padding: 10px 4px;
+  font-size: 19px;
+  font-weight: 100;
+  text-align: center;
+} 

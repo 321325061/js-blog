@@ -7,8 +7,7 @@
 }
 .layui-col-space15 .layui-col-md8{
   border-radius: 2px;
-  background-color: #fff;
-  box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+  /* box-shadow: 0 1px 2px 0 rgba(0,0,0,.05); */
   padding-bottom: 0;
 }
 
@@ -18,33 +17,51 @@
 
 .article-list li {
   position: relative;
-  padding: 15px 15px 15px 75px;
+  padding: 86px 42px 86px 55px;
+  margin: 20px 0;
   border-bottom: 1px dotted #e2e2e2;
+  background-color: #fff;
+  font-family: PingFang SC,Hiragino Sans GB,Arial,Microsoft YaHei,Verdana,Roboto,Noto,Helvetica Neue,sans-serif !important;
+}
+.article-list li:hover{
+  border-radius: 4px;
+  box-shadow: 1px 3px 9px #ccc;
+  transition: .3s;
+}
+
+.layui-col-md8 .lun_padding{
+  padding: 6px;
+  background-color: #fff;
+
+}
+.article-list li::after {
+  content: '';
+  clear: both;  
 }
 
 .list-face {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  bottom: 13%;
+  left: 2%;
 }
-
-
-
-
 
 /*文章列表头像*/
 
 .article-list img {
   display: block;
-  width: 45px;
-  height: 45px;
+  width: 31px;
+  height: 31px;
   margin: 0;
-  border-radius: 2px;
+  border-radius: 15%;
 }
 
 .article-list h2 {
+  position: absolute;
+  top: 13%;
+  left: 2%;
   font-size: 0;
-  height: 22px;
+  height: 38px;
+  width: 68%;
 }
 
 .articlt-title {
@@ -54,26 +71,72 @@
 }
 
 .article-list h2 a {
-  font-size: 16px;
-  margin-right: 16px;
+  display: inline-block;
+  font-size: 25px;
+ 
 }
 
-.article-list h2 .layui-badge {
+.article-list h2 a:nth-of-type(1) {
+  margin-right: 16px;
+  padding-top: 1px;
   padding-bottom: 3px;
+}
+
+.article-list h2 a:nth-of-type(2) {
+  height: 100%;
+  font-size: 27px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.article-list li:hover a:nth-of-type(2){
+  color: #ef5454;
+}
+.article-list h2 .layui-badge {
+  padding-bottom: 2px;
+  margin-top: 1%;
 }
 
 /*描述*/
 
 .list-info {
-  margin-top: 7px;
+  position: absolute;
+  bottom: 16%;
+  left: 7.5%;
+  width: 89%;
+  font-size: 15px;
 }
 
 .list-info * {
   padding-right: 10px;
-  color: #999;
+  color:#8f8484;
+}
+
+.list-info a:nth-of-type(1){
+  margin-right: 1%;
+}
+
+.article-list .list-content{
+  position: absolute;
+  top: 42%;
+  left: 2%;
+  width: 92%;
+  height: 21px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.article-list .list-content a{
+  color: #8a8a8a;
 }
 
 .list-reply {
   float: right;
   margin-top: 3px;
+}
+
+/* 轮播图 */
+.layui-container .layui-col-md8  .layui-carousel div {
+  border-radius: 4px;
 }

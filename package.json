@@ -21,6 +21,7 @@
     "fs": "^0.0.1-security",
     "koa": "^2.6.2",
     "koa-body": "^4.0.4",
+    "koa-compress": "^3.0.0",
     "koa-logger": "^3.2.0",
     "koa-multer": "^1.0.2",
     "koa-router": "^7.4.0",
@@ -28,6 +29,8 @@
     "koa-static": "^5.0.0",
     "koa-views": "^6.1.4",
     "mongoose": "^5.3.13",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "rd": "^2.0.1",
+    "wowjs": "^1.1.3"
   }
 }

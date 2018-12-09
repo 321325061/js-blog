@@ -6,6 +6,7 @@ const body = require("koa-body")
 const logger  = require("koa-logger")
 const { join } = require("path")
 const session = require("koa-session")
+const  compress = require('koa-compress')
 
 //生成 koa 实例
 const app = new koa
@@ -24,6 +25,11 @@ const CONFIG = {
 
 //注册静态文件模板
 app.use(static(join(__dirname , "public")))
+// 配置 koa-compress 资源压缩
+app.use(compress({
+  threshold: 100,
+  flush: require('zlib').Z_SYNC_FLUSH
+}))
 // 配置 koa-body 处理 post 请求数据
 app.use(body())
 // 注册日志模块
@@ -73,30 +79,6 @@ app
         console.log('管理员用户名--> admin   密码--> admin')
       }
     })
-
-   /*  User
-    .find({username: '111'})
-    .then(data => {
-      if(data.length === 0){
-        //管理员不存在 创建
-        new User({
-          username: '111',
-          password: encrpty('111'),
-          role: 1,
-          articleNum: 0,
-          commentNum: 0
-        })
-        .save()    
-        .then(data => {
-          console.log('用户名--> 111   密码--> 111')
-        })
-        .catch(err => {
-          console.log('创建失败')
-        })
-      }else{
-        console.log('用户名-->111   密码--> 111')
-      }
-    }) */
 
 }
 

@@ -1,6 +1,10 @@
 const Article = require('../Models/article')
 const User  = require('../Models/user')
 const Comment = require('../Models/comment')
+const {join} = require('path')
+const fs = require('fs')
+const {read} = require('rd')
+
 
 // 返回文章发表页
 exports.addPage = async (ctx) =>{
@@ -65,7 +69,7 @@ exports.getList = async(ctx) => {
     err ?  console.log(err) : num
   })
 
-  const num = 8
+  const num = 12
   const artList = await Article
     .find()
     .sort('-created') //倒序
@@ -74,16 +78,39 @@ exports.getList = async(ctx) => {
     .populate({//mongo 用于连表的api
       path: 'author',  /*对象 因为在 Schama.artical.author 里已经关联好了 users 表 所以在这里只需要拿来关联属性
       即 可以得到 path 里面 ‘author’ 所关联的表的某些属性 */
-      select: 'username _id avatar' //选择想要拿到哪些属性
+      select: 'username _id avatar content' //选择想要拿到哪些属性
     })
     .then( data => data) //在查询成功后返回数据 到 data
     .catch(err => console.log(err)) //查询失败后 输出 并返回信息给 data
+
+
+    // 获得 轮播 img
+    let url =  ctx.url
+    let  lunboList =[]
+    const arr = fs.readdirSync(join(__dirname,'../public/img/lunbo'))//返回轮播图片名字字符串
+
+ 
+    let imgName = []
+    arr.forEach((v) => {
+      imgName.push(v.replace(/[(\.jpg)$ + (\.png)$]/g, ''))
+    }) // 获得图片名字(去除后缀)
+
+    if(url === '/'){
+      imgName.forEach((v ,i) => {
+        lunboList.push(`img/lunbo/${v}.jpg`)
+      })
+    }else if(url.split("/")[1] === 'page'){
+      imgName.forEach((v ,i) => {
+        lunboList.push(`../../img/lunbo/${v}.jpg`)
+      })
+    }
 
   await ctx.render('index', {
     session: ctx.session,
     titles: "实战博客",
     artList,
-    maxNum
+    maxNum,
+    lunboList
   })
 }
 

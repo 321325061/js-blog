@@ -1,8 +1,32 @@
 #main .layui-container{
   margin-bottom: 15px;
   margin-top: 76px;
+  padding-top: 8px;
   border-radius: 2px;
   background-color: #fff;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
   border-top:1px solid #fff;
+}
+
+
+#main .layui-container ul.layui-tab-title .li_right{
+  position: absolute;
+  left: 5%;
+}
+
+#main .layui-container .layui-tab-content{
+  padding-top: 19px;
+}
+
+#canvas {
+  display: inline-block;
+  width: 100px;
+  height: 37px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.layui-form-item div.layui-input-inline {
+  width: 220px;
 }

@@ -16,18 +16,26 @@ block contents
   
   .layui-container
     .layui-row.layui-col-space15
+
       //- 文章列表
       .layui-col-md8
+        div.lun_padding
+          .layui-carousel#test1
+            div(carousel-item)
+             each info in lunboList
+              img(src=info, alt="")
+
         ul.article-list
           each info in artList
-            li
+            li(data-scroll-reveal="enter bottom over 1s",data-wow-duration='1.5s',data-wow-offset='15').wow.fadeInUp
               a.list-face
                 img(src=info.author.avatar, alt=info.author)
               h2
                 a.layui-badge= info.tips
                 a.articlt-title.ellipsis(href=`/article/${info._id}`)= info.titles
+              .list-content
+                a= info.content
               .list-info
-                a 作者:
                 a= info.author.username
                 
                 span 发表时间

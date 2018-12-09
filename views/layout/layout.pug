@@ -1,14 +1,21 @@
 doctype html
 head
-  title
+  title 个人博客论坛
   meta(charset="utf-8")
-  meta(name="author",chontent="fengyu")
+  meta(name="author",chontent="yujian")
+  link(rel="icon" href="/img/1.jpg" type="image/x-icon")
+  link(rel="shortcut icon" href="/img/1.jpg" type="image/x-icon")
   link(rel="stylesheet", href="/layui/css/layui.css")
   link(rel="stylesheet", href="/css/nav.css")
+  link(rel="stylesheet", href="/css/animate.css")
   block css
   
   script(src="/layui/layui.js")
+  script(src="/js/wow.min.js") 
 
+  script.
+    new WOW().init();
+   
 body
   //- nav
   include ./nav

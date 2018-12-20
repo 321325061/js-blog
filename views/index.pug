@@ -27,9 +27,9 @@ block contents
 
         ul.article-list
           each info in artList
-            li(data-scroll-reveal="enter bottom over 1s",data-wow-duration='1.5s',data-wow-offset='15').wow.fadeInUp
+            li(data-scroll-reveal="enter bottom over 1s",data-wow-duration='1s',data-wow-offset='50').wow.fadeInUp
               a.list-face
-                img(src=info.author.avatar, alt=info.author)
+                img(lay-src=info.author.avatar, alt=info.author)
               h2
                 a.layui-badge= info.tips
                 a.articlt-title.ellipsis(href=`/article/${info._id}`)= info.titles
@@ -52,9 +52,3 @@ block contents
 block scripts
   script(src="/js/index.js")
   
-    
-    
-    
-    
-
-

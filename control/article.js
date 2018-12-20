@@ -3,7 +3,6 @@ const User  = require('../Models/user')
 const Comment = require('../Models/comment')
 const {join} = require('path')
 const fs = require('fs')
-const {read} = require('rd')
 
 
 // 返回文章发表页
@@ -80,13 +79,26 @@ exports.getList = async(ctx) => {
       即 可以得到 path 里面 ‘author’ 所关联的表的某些属性 */
       select: 'username _id avatar content' //选择想要拿到哪些属性
     })
-    .then( data => data) //在查询成功后返回数据 到 data
+    .then(data => {
+      data.forEach((v ,i) => {
+        data[i].content = v.content.replace(/<\/?.+?>/g,"").replace(/ /g,"")       
+      }) 
+      return data    
+    }) //在查询成功后返回数据 到 data
+    
+    // .then(data =>{
+    //   return data.forEach((v ,i) => {
+    //     data[i].content = v.content.replace(/<\/?.+?>/g,"").replace(/ /g,"")       
+    //   }) 
+    // })
     .catch(err => console.log(err)) //查询失败后 输出 并返回信息给 data
-
+    // data => 
+  
 
     // 获得 轮播 img
-    let url =  ctx.url
     let  lunboList =[]
+    {
+    let url =  ctx.url
     const arr = fs.readdirSync(join(__dirname,'../public/img/lunbo'))//返回轮播图片名字字符串
 
  
@@ -104,7 +116,9 @@ exports.getList = async(ctx) => {
         lunboList.push(`../../img/lunbo/${v}.jpg`)
       })
     }
+  }
 
+  
   await ctx.render('index', {
     session: ctx.session,
     titles: "实战博客",
@@ -118,7 +132,9 @@ exports.getList = async(ctx) => {
 exports.details = async(ctx) => {
   //获取文章 id
   const _id = ctx.params.id
-  
+
+  let commentRole = ctx.session.commentRole
+  // console.log(commentRole)
   //查找文章本身数据
   const article = await Article
     .findById(_id)
@@ -136,11 +152,39 @@ exports.details = async(ctx) => {
     titles: "文章详情页",
     article,
     comment,
+    commentRole,
     session: ctx.session
   })
-
 }
 
+//用户禁言
+exports.commStop = async(ctx) => {
+  const _id = ctx.params.id
+
+
+  let res = {
+    state: 1,
+    message: '修改禁言成功'
+  }
+
+  User.findById(_id)
+    .then(data => {
+      let commentRole = data.commentRole
+      if(commentRole === '1'){
+        User.findByIdAndUpdate({_id}, {$set:{commentRole: 0}} , (err) => {if(err) return console.log(err)})
+        res
+      }
+      if(commentRole === '0'){
+        User.findByIdAndUpdate({_id}, {$set:{commentRole: 1}}, (err) => {if(err) return console.log(err)})
+        res = {
+          state: 1,
+          message: '解禁成功'
+        }
+      }
+    })    
+
+ctx.body = res
+}
 
 // 后台管理 查询对应用户所有文章
 exports.artlist = async (ctx) => {

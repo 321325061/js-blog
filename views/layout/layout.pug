@@ -4,14 +4,28 @@ head
   meta(charset="utf-8")
   meta(name="author",chontent="yujian")
   link(rel="icon" href="/img/1.jpg" type="image/x-icon")
-  link(rel="shortcut icon" href="/img/1.jpg" type="image/x-icon")
+  //- link(rel="shortcut icon" href="/img/1.jpg" type="image/x-icon")
   link(rel="stylesheet", href="/layui/css/layui.css")
   link(rel="stylesheet", href="/css/nav.css")
   link(rel="stylesheet", href="/css/animate.css")
-  block css
-  
+  link(rel="stylesheet", href="/css/right_tag.css")
+  link(rel="stylesheet", href="/css/footer.css")
+  style(ref='stylesheet').
+    .text-center{
+      text-align: center;
+    }
+    //- #myCanvas {
+    //-   background-color: black;
+    //-   background-color: black;
+    //-   position: fixed;
+    //-   top: 0;
+    //-   left: 0;
+    //-   z-index: -1;
+    //- }
+
+  block css  
   script(src="/layui/layui.js")
-  script(src="/js/wow.min.js") 
+  script(src="/js/wow.min.js")   
 
   script.
     new WOW().init();
@@ -25,6 +39,9 @@ body
 
   //- footer
   include ./footer.pug
+
+  //- canvas#myCanvas
   
   //- script
   block scripts
+  //- script(src="/js/lizi.js") 

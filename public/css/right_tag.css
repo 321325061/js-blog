@@ -1,0 +1,40 @@
+.layui-col-md4 .layui-card:nth-of-type(1) div.layui-card-body{
+  padding: 15px 15px 19px;
+  font:italic bold 17px/20px arial,sans-serif;
+}
+
+.layui-col-md4 .side-nav{
+  padding: 26px 0 168px 29px;
+  background-color: #fff;
+  margin-top: 20px;
+}
+.layui-col-md4 .side-nav .clearfix{
+  display:block;
+  clear:both;
+  zoom: 1;
+}
+.layui-col-md4 .side-nav ul li{
+  float: left;
+  width: 137px;
+  height: 60px;
+  line-height: 9px;
+  margin: 0 10px 15px;
+  text-align: center;
+  border-radius: 5px;
+}
+.layui-col-md4 .side-nav ul li a{
+  font-size: 1pc;
+  font-weight: 500;
+  color: #fff;
+  line-height: 60px;
+  display: block;
+  transition: all 1s;
+}
+.layui-col-md4 .side-nav ul li:hover a{
+  background: hsla(0,0%,100%,.2);
+  transform: rotateX(360deg);
+}
+.side-nav ul li.nav-1{background-color: #666;}
+.side-nav ul li.nav-2{background-color: #0cc;}
+.side-nav ul li.nav-3{background-color: #c96;}
+.side-nav ul li.nav-4{background-color: #63c;}

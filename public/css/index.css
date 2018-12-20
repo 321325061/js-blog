@@ -32,7 +32,7 @@
 .layui-col-md8 .lun_padding{
   padding: 6px;
   background-color: #fff;
-
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
 }
 .article-list li::after {
   content: '';
@@ -78,8 +78,8 @@
 
 .article-list h2 a:nth-of-type(1) {
   margin-right: 16px;
-  padding-top: 1px;
-  padding-bottom: 3px;
+  padding-top: 5px;
+    padding-bottom: 7px;
 }
 
 .article-list h2 a:nth-of-type(2) {
@@ -140,3 +140,30 @@
 .layui-container .layui-col-md8  .layui-carousel div {
   border-radius: 4px;
 }
+
+ /* 主页 nav */
+ .layui-nav .layui-nav-item:nth-child(1) > a{
+   margin: 0 12px;
+   /* padding:0 30px; */
+  }
+ .layui-nav .layui-nav-item:nth-child(2) > a{
+   margin: 0 22px;
+   /* padding:0 20px; */
+  }
+ .layui-nav .layui-nav-item:nth-child(3) > a{
+   margin: 0 12px;
+   /* padding:0 20px; */
+  }
+ .layui-nav .layui-nav-item:nth-child(4) > a{
+   margin: 0 22px;
+   /* padding:0 20px; */
+  }
+ .layui-nav .layui-nav-item:nth-child(5) > a{
+   margin: 0 12px;
+   /* padding:0 20px; */
+  }
+ .layui-nav .layui-nav-item:nth-child(6) > a{
+   margin: 0 12px;
+   /* padding:0 20px; */
+  }
+

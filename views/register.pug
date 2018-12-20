@@ -1,8 +1,17 @@
 extends ./layout/layout
 
+
 block css
   link(rel="stylesheet", href="/css/register.css")
-
+  //- style(ref='stylesheet').
+  //-   #myCanvas {
+  //-     background-color: black;
+  //-     background-color: black;
+  //-     position: fixed;
+  //-     top: 0;
+  //-     left: 0;
+  //-     z-index: -1;
+  //-   }
 mixin userinfo
   .layui-form-item
     label.layui-form-label 用户名
@@ -55,4 +64,11 @@ block contents
                   +btn
 
 block scripts
+  //- script.
+  //-   const _body = document.body
+  //-   _body.appendChild(document.createElement('canvas'))
+  //-   const _canvas = document.getElementsByTagName('body')[0].getElementsByTagName('canvas')[0]
+  //-   _canvas.id="myCanvas"
+    
   script(src="/js/register.js")
+  //- script(src="/js/lizi.js")

@@ -6,14 +6,58 @@
          i.layui-icon.layui-icon-home 首页
       li.layui-nav-item
         a(href="/") Web
+        ul.submenu
+          li
+            a(href="#") 子菜单A
+          li
+            a(href="#") 子菜单B
+          li
+            a(href="#") 子菜单C
+          li
+            a(href="#") 子菜单D
+          li
+            a(href="#") 子菜单E
       li.layui-nav-item
         a(href="/") 大数据
+        ul.submenu
+          li
+            a(href="#") 子菜单A
+          li
+            a(href="#") 子菜单B
+          li
+            a(href="#") 子菜单C
+          li
+            a(href="#") 子菜单D
+          li
+            a(href="#") 子菜单E
       li.layui-nav-item
         a(href="/") Java
+        ul.submenu
+          li
+            a(href="#") 子菜单A
+          li
+            a(href="#") 子菜单B
+          li
+            a(href="#") 子菜单C
+          li
+            a(href="#") 子菜单D
+          li
+            a(href="#") 子菜单E
       li.layui-nav-item
         a(href="/") Python
+        ul.submenu
+          li
+            a(href="#") 子菜单A
+          li
+            a(href="#") 子菜单B
+          li
+            a(href="#") 子菜单C
+          li
+            a(href="#") 子菜单D
+          li
+            a(href="#") 子菜单E
       li.layui-nav-item
-        a(href="/") 关于博主
+        a(href="/about_up") 关于博主
 
     //-用户登陆按钮
     ul.layui-nav.blog-user
@@ -27,9 +71,7 @@
             //- 用户测试头像
             img(src=session.avatar).layui-nav-img
             span= session.username
-          dl.layui-nav-child
-            dd
-              a(href="/user/logout") 修改信息
+          dl.layui-nav-child           
             dd
               a(href="/user/logout") 退了
       else

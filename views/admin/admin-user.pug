@@ -6,13 +6,13 @@ block main
       tr
         th(lay-data="{field:'username', align:'center'}") 用户名
         th(lay-data="{field:'role', align:'center'}") 权限
-        th(lay-data="{field:'articleNum', align:'center'}") 文章数量
-        
+        th(lay-data="{field:'articleNum', align:'center'}") 文章数量        
         th(lay-data="{field:'commentNum', align:'center'}") 评论数量
-
+        th(lay-data="{field:'commentRole', align:'center'}") 是否被禁言
         th(lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}") 操作
   script(type="text/html")#barDemo
     a(lay-event="del").layui-btn.layui-btn-danger.layui-btn-xs 删除
+    a(lay-event="jinyan").layui-btn.layui-btn-xs 禁言
   
   script.
     layui.use(['table', 'layer'], function(){
@@ -24,26 +24,48 @@ block main
         const data = obj.data
         const _id = data._id
         
-        if(obj.event !== "del") return
-        layer.confirm("确认删除？", () => {
-          console.log(_id)
-          $.ajax({
-            method: "delete",
-            url: "/user/" + _id,
-            data: {
-              _id
-            },            
-            success(res){
-              if(res.state){
-                layer.msg(res.message, {
-                  anim: 1,
-                  time: 800
-                }, () => location.reload())
-              }else{
-                console.error(res.message)
+        if(obj.event === "del"){
+          layer.confirm("确认删除？", () => {
+            console.log(_id)
+            $.ajax({
+              method: "delete",
+              url: "/user/" + _id,
+              data: {
+                _id
+              },            
+              success(res){
+                if(res.state){
+                  layer.msg(res.message, {
+                    anim: 1,
+                    time: 800
+                  }, () => location.reload())
+                }else{
+                  console.error(res.message)
+                }
               }
-            }
+            })
           })
-        })
+        }else if(obj.event === "jinyan"){
+          layer.confirm("是否修改禁言", () => {
+            console.log(_id)
+            $.ajax({
+              method: "post",
+              url: '/article/comStop/' + _id,
+              data: { 
+                _id
+              },
+              success(res){
+                if(res.state){
+                  layer.msg(res.message, {
+                    anim: 1,
+                    time: 800
+                  }, () => location.reload())
+                }else{
+                  console.log(res.message)
+                }
+              }
+            })
+          }) 
+        }       
       })
     });

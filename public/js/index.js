@@ -1,9 +1,16 @@
-layui.use(['element', 'laypage', 'carousel'], function(){
+layui.use(['element', 'laypage', 'carousel', 'flow'], function(){
   let element = layui.element,
       laypage = layui.laypage,
       carousel = layui.carousel,
+      flow = layui.flow
       $ = layui.$
   
+    flow.lazyimg()
+  // flow.locd({
+  //   elem: '#artList',
+    
+  // })
+
   element.tabDelete('demo', 'xxx')
 
   laypage.render({

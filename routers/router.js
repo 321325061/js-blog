@@ -5,13 +5,15 @@ const user = require("../control/user")
 const article = require("../control/article")
 const comment = require("../control/comment")
 const admin = require("../control/admin")
+const about = require("../control/about-up")
 const upload = require('../util/upload')
 
 const router = new Router
 
 //设计主页
 router.get("/" , user.keepLog , article.getList)
-
+// 设计关于博主
+router.get("/about_up", about.aboutInd)
 
 // 主要用来处理返回 用户登陆，用户注册  用户退出
 router.get(/^\/user\/(?=reg|login)/, async(ctx) => {
@@ -36,11 +38,15 @@ router.get('/article', user.keepLog , article.addPage)
 //文章添加
 router.post('/article', user.keepLog , article.add)
 
+
 // 文章列表分页 路由
 router.get("/page/:id", article.getList)
 
 // 文章详情页面
 router.get('/article/:id', user.keepLog ,article.details)
+
+// 用户禁言
+router.post('/article/comStop/:id', user.keepLog , article.commStop)
 
 // 发表评论
 router.post('/comment', user.keepLog, comment.save)
@@ -70,6 +76,7 @@ router.del('/article/:id', user.keepLog , article.del)
 router.get('/user/users' , user.keepLog , user.userlist)
 // 后台  删除用户
 router.del('/user/:id', user.keepLog , user.del)
+
 
 
 //  任意路由访问 404页面

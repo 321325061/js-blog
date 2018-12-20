@@ -70,3 +70,8 @@ fieldset{
   padding: 20px 0;
   margin-left: -60px;
 }
+
+/* 禁言按钮 */
+#jyBtn{
+  margin-top: 28px;
+}

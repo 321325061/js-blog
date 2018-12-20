@@ -90,3 +90,26 @@ exports.del =  async(ctx) => {
 
   ctx.body = res
 }
+
+// 用户禁言
+exports.userStop = async(ctx) => {
+  let userId = ctx.params.id
+  let res = {
+    state: 1,
+    message: '成功'
+  }
+  await User.findById(userId)
+    .then(data => {
+      console.log('userdata'+ data),
+      // data.remove()  
+      data.commentRole = 0      
+    })
+    .catch(err => {
+       res = {
+        state: 0,
+        message:  err
+       }
+    })
+
+    ctx.body = res
+}

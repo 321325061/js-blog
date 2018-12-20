@@ -43,7 +43,10 @@ block contents
             legend 评论
           div.txt
             <textarea id="comment-txt"></textarea>
-            button.layui-btn 回复
+            if commentRole < 1
+              div.layui-btn#jyBtn 你已被管理员禁言
+            else     
+              button.layui-btn 回复
           ul.comment-list
             each info in comment
               li

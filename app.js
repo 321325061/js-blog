@@ -66,7 +66,8 @@ app
           password: encrpty('admin'),
           role: 666,
           articleNum: 0,
-          commentNum: 0
+          commentNum: 0,
+          commentRole: 1,
         })
         .save()    
         .then(data => {

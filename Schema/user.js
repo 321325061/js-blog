@@ -6,6 +6,10 @@ const UserSchema = new Schema({
   password: String,
   articleNum: Number,
   commentNum: Number,
+  commentRole: {
+    type: String,
+    default: 1
+  },
   role: {
     type: String,
     default: 1
@@ -14,7 +18,7 @@ const UserSchema = new Schema({
     type: String,
     default: '/avatar/default.jpg' //默认值
   }
-  
+
   //取消显示版本号
 }, {versionKey: false,
   timestamps: { createdAt: 'created'}

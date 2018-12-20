@@ -1,6 +1,7 @@
 extends ./admin
 
 block main
+  div(lay-data="{url:'/user/articles', page:true, id:'idTest'}", lay-filter="demo").layui-table
   div 头像上传
     button(type="button")#upload.layui-btn.layui-btn-danger
       i.layui-icon

@@ -1,0 +1,47 @@
+
+  /* 后台管理 */
+  #admin-user .blog-header {
+    position: fixed;
+    left: 11.7%;
+    top: 0;
+    z-index: 10000;
+    width: 89%;
+    height: 63px;
+    background-color: #fff;
+    /* border-bottom: 1px solid #404553; */
+    border-right: 1px solid #404553;
+    border-radius: 0;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);
+}
+  #admin-user .layui-nav-tree li.layui-nav-item a{
+    height: 63px;
+    line-height: 58px;
+    margin-left: 2%;
+  }
+  #admin-user .layui-nav-tree li.layui-nav-item:first-child a{
+    font-size: 19px;
+    /* margin-left: 14%; */
+  }
+  
+  #admin-user .layui-container ul.layui-nav:nth-of-type(2){
+    right: -1%;
+  }
+  #admin-user .layui-container ul.layui-nav:nth-of-type(1){
+    left: -1%;
+  }
+  
+  #admin-user .blog-header .layui-container .admin-user li.layui-nav-item{
+    line-height: 63px;
+  }
+  #admin-user .blog-header .layui-container ul.admin-user{
+    position: absolute;
+    background-color: #fff;
+  }
+  #admin-user .blog-header .layui-container ul.admin-user li a{
+    color:#404553;
+  }
+
+   /* 左侧导航栏 */
+   #admin-user div.layui-side{
+    width: 11.7%;
+   }

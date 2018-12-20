@@ -115,7 +115,8 @@ exports.login = async ctx => {
       username,
       uid: data[0]._id,
       avatar: data[0].avatar,
-      role: data[0].role
+      role: data[0].role,
+      commentRole: data[0].commentRole
     }
 
     //登陆成功
@@ -169,6 +170,7 @@ exports.logout = async(ctx) => {
 //用户头像上传
 exports.upload = async(ctx) => {
   const filename = ctx.req.file.filename  
+  console.log('user.upload filename：'+ filename)
   let data = {}
 
   await User.update({_id: ctx.session.uid} , 
@@ -193,14 +195,18 @@ exports.upload = async(ctx) => {
 }
 
 // 后台管理 查询所有用户
-exports.userlist = async (ctx) => {
-    
-   const data = await User.find()
-  
-  // const data = await Article.find({author: uid})
+exports.userlist = async (ctx) => { 
+  let data = await User.find()
 
-  // console.log(data)
+  // data.forEach((v ,i) => {       
+  //   console.log(i + ':-----'+ v) 
+  //   if(data[i].commentRole === '1'){
+  //     data[i].commRole_str = '可发言'
+  //   }
+  //   else if(data[i].commentRole === '0'){data[i].commRole_str = '已禁言'}
+  // })
 
+  console.log(data)
   ctx.body = {
     //固定传数据写法, layui标准
     code: 0,
@@ -233,3 +239,4 @@ exports.del =  async(ctx) => {
 
     ctx.body = res
 }
+
